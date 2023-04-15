@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:to_do_list_squad/core/components/sqd_modal_bottom_sheet.dart';
 import 'package:to_do_list_squad/core/utils/sqd_color.dart';
 import 'package:to_do_list_squad/src/to_do_list/presentation/components/all_page.dart';
 import 'package:to_do_list_squad/src/to_do_list/presentation/components/done_page.dart';
 import 'package:to_do_list_squad/src/to_do_list/presentation/components/pending_page.dart';
+import 'package:to_do_list_squad/src/to_do_list/presentation/provider/to_do_state.dart';
 
 class ToDoListPage extends StatefulWidget {
   const ToDoListPage({super.key});
@@ -13,6 +15,7 @@ class ToDoListPage extends StatefulWidget {
 }
 
 class _ToDoListPageState extends State<ToDoListPage> {
+  final toDoState = GetIt.I.get<ToDoState>();
   final PageController _pageController = PageController(
     initialPage: 0,
     keepPage: true,
@@ -25,6 +28,13 @@ class _ToDoListPageState extends State<ToDoListPage> {
   ];
 
   int _currentPage = 0;
+
+  @override
+  void initState() {
+    toDoState.getToDoList();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +45,9 @@ class _ToDoListPageState extends State<ToDoListPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          sQDShowModalBottomSheet(context);
+          sQDShowModalBottomSheet(
+            context,
+          );
         },
         backgroundColor: SQDColor.primary,
         child: const Icon(Icons.add),
@@ -104,6 +116,7 @@ class _ToDoListPageState extends State<ToDoListPage> {
             ),
             Expanded(
               child: PageView(
+                physics: const NeverScrollableScrollPhysics(),
                 controller: _pageController,
                 children: const [
                   AllPage(),

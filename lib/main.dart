@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_list_squad/core/routes/app_routes.dart';
 import 'package:to_do_list_squad/core/routes/navigation_service.dart';
+import 'package:to_do_list_squad/core/utils/get_it_menager.dart';
 import 'package:to_do_list_squad/core/utils/sqd_color.dart';
 
 import 'src/to_do_list/presentation/screens/to_do_list_page.dart';
 
 void main() {
-  locator.registerSingleton(NavigationService());
+  setupLocator();
   runApp(const MyApp());
 }
 
@@ -18,9 +19,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: locator<NavigationService>().navigatorKey,
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.home,
       routes: {
-        AppRoutes.home: (context) => const ToDoListPage(),
+        AppRoutes.home: (context) =>  ToDoListPage(),
       },
       theme: ThemeData(
         primaryColor: SQDColor.primary,

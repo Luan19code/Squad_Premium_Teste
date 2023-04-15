@@ -1,43 +1,41 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:to_do_list_squad/src/to_do_list/domain/entities/to_do.dart';
+class ToDoModel {
+  final bool isChecked;
+  final String text;
+  final String id;
 
-class ToDoModel extends ToDo {
-  ToDoModel({
-    required bool isChecked,
-    required String text,
-    required String id,
-  }) : super(
-          id: id,
-          isChecked: isChecked,
-          text: text,
-        );
+  ToDoModel({required this.isChecked, required this.text, required this.id});
 
-  ToDo copyWith({
-    String? id,
+
+  
+
+  ToDoModel copyWith({
     bool? isChecked,
     String? text,
+    String? id,
   }) {
-    return ToDo(
-      id: id ?? this.id,
+    return ToDoModel(
       isChecked: isChecked ?? this.isChecked,
       text: text ?? this.text,
+      id: id ?? this.id,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
       'isChecked': isChecked,
       'text': text,
+      'id': id,
     };
   }
 
   factory ToDoModel.fromMap(Map<String, dynamic> map) {
     return ToDoModel(
-      id: map['id'] as String,
       isChecked: map['isChecked'] as bool,
       text: map['text'] as String,
+      id: map['id'] as String,
     );
   }
 
@@ -47,15 +45,15 @@ class ToDoModel extends ToDo {
       ToDoModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'ToDo(id: $id, isChecked: $isChecked, text: $text)';
+  String toString() => 'ToDoModel(isChecked: $isChecked, text: $text, id: $id)';
 
   @override
-  bool operator ==(covariant ToDo other) {
+  bool operator ==(covariant ToDoModel other) {
     if (identical(this, other)) return true;
 
-    return other.id == id && other.isChecked == isChecked && other.text == text;
+    return other.isChecked == isChecked && other.text == text && other.id == id;
   }
 
   @override
-  int get hashCode => id.hashCode ^ isChecked.hashCode ^ text.hashCode;
+  int get hashCode => isChecked.hashCode ^ text.hashCode ^ id.hashCode;
 }

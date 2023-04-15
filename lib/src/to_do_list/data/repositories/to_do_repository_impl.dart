@@ -1,45 +1,24 @@
-import 'package:to_do_list_squad/src/to_do_list/domain/entities/to_do.dart';
+import 'dart:convert';
+
+import 'package:to_do_list_squad/core/utils/shared_preferences_manager.dart';
+import 'package:to_do_list_squad/src/to_do_list/data/models/to_do_model.dart';
 import 'package:to_do_list_squad/src/to_do_list/domain/repositories/to_do_repository.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ToDoRepositoryImpl implements ToDoRepository {
-  final SharedPreferences sharedPreferences;
-
-  ToDoRepositoryImpl(this.sharedPreferences);
-
   @override
-  Future<void> addNewToDo(ToDo toDo) {
-    // TODO: implement addNewToDo
-    throw UnimplementedError();
+  Future<List<ToDoModel>> getListToDos() async {
+    final result = await SharedPreferencesManager().get("to_do_list");
+    if (result != null && result.isNotEmpty) {
+      return jsonDecode(result)
+          .map<ToDoModel>((e) => ToDoModel.fromMap(e))
+          .toList();
+    }
+    return [];
   }
 
   @override
-  Future<void> deleteToDo({required String id}) {
-    // TODO: implement deleteToDo
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List<ToDo>> getAllListToDos() {
-    // TODO: implement getAllListToDos
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List<ToDo>> getDoneListToDos() {
-    // TODO: implement getDoneListToDos
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List<ToDo>> getPendingListToDos() {
-    // TODO: implement getPendingListToDos
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> updateToDo(ToDo toDo) {
-    // TODO: implement updateToDo
-    throw UnimplementedError();
+  Future<void> setListToDos(List<ToDoModel> listToDos) async {
+    await SharedPreferencesManager().save(
+        "to_do_list", listToDos.map((e) => e.toJson()).toList().toString());
   }
 }

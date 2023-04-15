@@ -8,6 +8,7 @@ class SQDColor {
   static const Color divider = Color(0xFFBDBDBD);
   static const Color background = Color(0xFFF3FFFF);
   static const Color error = Color(0xFFB00020);
+  static const Color danger = Color(0xFFB00020);
   static const Color success = Color(0xFF00C853);
   static const Color warning = Color(0xFFFFAB00);
   static const Color info = Color(0xFF2196F3);
