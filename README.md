@@ -47,7 +47,7 @@ Projeto desenvolvido com Flutter/Dart na sua versão hibrida Mobile.
     <td>Tela inicial.</td>
   </tr>
   <tr>
-    <td><img src="image\readme.gif" width=600 height=400></td>
+    <td><img src="image\readme.gif" width=800 height=400></td>
   </tr>
  </table>
 
