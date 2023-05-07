@@ -53,7 +53,7 @@ Projeto desenvolvido com Flutter/Dart na sua versão hibrida Mobile.
 
 ## 🚀 Como executar o projeto
 
-Ao clonar o projeto, abra sua IDE selecione o pasta, execute o comando( flutter pub get ) no terminal onde o projeto se encontra para instalar as dependências.
+Ao clonar o projeto, abra sua IDE e selecione o pasta, execute o comando (flutter pub get) no terminal onde o projeto se encontra para instalar as dependências.
 Verifique se suas versões flutter e dart estão atualizadas.
 (Por favor verificar se sua maquina o flutter e dart instalados)
 
